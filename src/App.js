@@ -5,6 +5,13 @@ function App() {
   const [quotes, setQuotes] = useState([]);
   const [tag, setTag] = useState("love");
 
+  function getQuote() {
+    axios
+      .get(`https://quotable.io/quotes?tags=${tag}`)
+      .then((res) => setQuotes(res.data.results))
+      .catch((err) => console.log(err.message));
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
   }
