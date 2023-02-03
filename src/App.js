@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Item from "./components/Item.js";
 
 function App() {
   const [quotes, setQuotes] = useState([]);
@@ -14,7 +15,12 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    getQuote();
   }
+
+  useEffect(() => {
+    getQuote();
+  });
 
   return (
     <div className="App">
@@ -43,6 +49,13 @@ function App() {
           Search
         </button>
       </form>
+      {quotes.length !== 0 && (
+        <div className="mt-5 w-[800px] mx-auto ">
+          {quotes.map((quote, i) => {
+            return <Item quote={quote} key={i} />;
+          })}
+        </div>
+      )}
     </div>
   );
 }
